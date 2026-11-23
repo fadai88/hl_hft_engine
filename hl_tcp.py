@@ -5,7 +5,7 @@ import logger # type: ignore
 def tcp_open(hostname, port):
     sock = socket.socket()
     logger.log("dns_resolving", host=hostname, port=port)
-    infos = socket.getaddrinfo(hostname, port)
+    infos = socket.getaddrinfo(hostname, port, type=socket.SOCK_STREAM)
     ip = infos[0][4][0]
     ips = [info[4][0] for info in infos]
     logger.log("dns_resolved", ips=ips)

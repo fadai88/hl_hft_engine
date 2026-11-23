@@ -1,0 +1,4 @@
+draft.py
+.venv/
+__pycache__/
+log_file.txt
