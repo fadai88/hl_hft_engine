@@ -1,4 +1,4 @@
-import logger, hl_tcp, hl_tls, hl_http # type: ignore
+import logger, hl_tcp, hl_tls, hl_http, hl_ws # type: ignore
 import h11, json
 
 HOST = "api.hyperliquid.xyz"
@@ -15,6 +15,8 @@ if status_code != 200:
 else:
     universe = json.loads(response_body_bytes.decode("utf-8"))
     tokens = [token['name'] for token in universe['universe']]
+
+ws = hl_ws.ws_handshake(sock, ssl_obj, incoming, outgoing, HOST, path="/ws")
 
 hl_tcp.tcp_close(sock)
 logger.close_log()
