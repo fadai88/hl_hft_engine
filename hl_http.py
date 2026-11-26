@@ -37,9 +37,6 @@ def read_response(sock, ssl_obj, incoming, conn):
                     incoming_data = ssl_obj.read(65536)
                     conn.receive_data(incoming_data)
                     if not incoming_data:
-                        # TLS session closed by server: h11 has now been told about the EOF;
-                        # stop reading (read() would return b"" forever) and let next_event()
-                        # decide whether the response is complete or truncated
                         logger.log("tls_closed_by_peer")
                         break
                 except ssl.SSLWantReadError:
